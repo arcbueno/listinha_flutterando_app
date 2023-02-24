@@ -11,10 +11,10 @@ void main() {
 
   test('Calculate progress', () {
     final tasks = [
-      Task(Uuid.v4(), "", completed: true),
-      Task(Uuid.v4(), ""),
-      Task(Uuid.v4(), ""),
-      Task(Uuid.v4(), "", completed: true),
+      Task(Uuid.v4(), '', completed: true),
+      Task(Uuid.v4(), ''),
+      Task(Uuid.v4(), ''),
+      Task(Uuid.v4(), '', completed: true),
     ];
     final progress = TaskCard(board: model).getProgress(tasks);
     expect(progress, 0.5);

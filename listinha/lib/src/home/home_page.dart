@@ -43,10 +43,10 @@ class _HomePageState extends State<HomePage> {
                   Uuid.v4(),
                   'Titulo da lista 1',
                   tasks: [
-                    Task(Uuid.v4(), "", completed: true),
-                    Task(Uuid.v4(), "", completed: true),
-                    Task(Uuid.v4(), ""),
-                    Task(Uuid.v4(), "", completed: true),
+                    Task(Uuid.v4(), '', completed: true),
+                    Task(Uuid.v4(), '', completed: true),
+                    Task(Uuid.v4(), ''),
+                    Task(Uuid.v4(), '', completed: true),
                   ],
                 );
                 return TaskCard(

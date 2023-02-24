@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:listinha/src/shared/store/app_store.dart';
 import 'package:listinha/src/shared/ui_utils.dart';
+import 'package:rx_notifier/rx_notifier.dart';
 
 class ConfigurationPage extends StatefulWidget {
   const ConfigurationPage({super.key});
@@ -11,11 +12,18 @@ class ConfigurationPage extends StatefulWidget {
 }
 
 class _ConfigurationPageState extends State<ConfigurationPage> {
+  final appStore = Modular.get<AppStore>();
+
+  void _changeThemeMode(ThemeMode? mode) {
+    if (mode != null) {
+      appStore.themeMode = mode;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final appStore = context.watch<AppStore>(
-      (store) => store.themeMode,
-    );
+    context.select(() => appStore.themeMode);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Configuração'),
@@ -36,20 +44,20 @@ class _ConfigurationPageState extends State<ConfigurationPage> {
             16.ph,
             RadioListTile<ThemeMode>(
               value: ThemeMode.system,
-              groupValue: appStore.themeMode.value,
-              onChanged: appStore.changeThemeMode,
+              groupValue: appStore.themeMode,
+              onChanged: _changeThemeMode,
               title: const Text('Sistema'),
             ),
             RadioListTile<ThemeMode>(
               value: ThemeMode.light,
-              groupValue: appStore.themeMode.value,
-              onChanged: appStore.changeThemeMode,
+              groupValue: appStore.themeMode,
+              onChanged: _changeThemeMode,
               title: const Text('Claro'),
             ),
             RadioListTile<ThemeMode>(
               value: ThemeMode.dark,
-              groupValue: appStore.themeMode.value,
-              onChanged: appStore.changeThemeMode,
+              groupValue: appStore.themeMode,
+              onChanged: _changeThemeMode,
               title: const Text('Escuro'),
             ),
             16.ph,
@@ -59,7 +67,7 @@ class _ConfigurationPageState extends State<ConfigurationPage> {
             ),
             16.ph,
             OutlinedButton(
-              onPressed: appStore.deleteApp,
+              onPressed: () {},
               child: const Text('Apagar cache e reiniciar app'),
             ),
           ],
